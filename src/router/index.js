@@ -1,9 +1,9 @@
-
 import AllFilmPage from "@/pages/AllFilmPage";
 import MainPage from "@/components/MainPage";
 import {createRouter, createWebHistory} from "vue-router";
 import FilmPage from "@/pages/FilmPage";
 import NotFound from "@/pages/NotFound";
+import FilmsLayout from "@/pages/FilmsLayout";
 
 
 const routes = [
@@ -14,13 +14,31 @@ const routes = [
     },
     {
         path: '/films',
-        name: 'films',
-        component: AllFilmPage
-    },
-    {
-        path: '/films/:id',
-        name: 'film',
-        component: FilmPage
+        name: 'filmsLayout',
+        component: FilmsLayout,
+        children: [
+            {
+                path: '',
+                name: 'films',
+                component: AllFilmPage
+            },
+            {
+                path: ':id',
+                name: 'film',
+                component: FilmPage,
+                beforeEnter: (to, from, next) => {
+                    if (localStorage.getItem('auth')) {
+                        next()
+                    } else {
+                        next({name: 'films'})
+                    }
+                },
+            },
+            {
+                path: '/:catchAll(.*/*)',
+                redirect: {name: 'films'}
+            },
+        ]
     },
     {
         path: '/:catchAll(.*)',
