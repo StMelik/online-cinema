@@ -3,6 +3,8 @@ import AllFilmPage from "@/pages/AllFilmPage";
 import MainPage from "@/components/MainPage";
 import {createRouter, createWebHistory} from "vue-router";
 import FilmPage from "@/pages/FilmPage";
+import NotFound from "@/pages/NotFound";
+
 
 const routes = [
     {
@@ -19,6 +21,11 @@ const routes = [
         path: '/films/:id',
         name: 'film',
         component: FilmPage
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'notFound',
+        component: NotFound
     }
 ]
 
