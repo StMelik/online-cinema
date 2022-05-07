@@ -66,6 +66,7 @@ export default {
   transition: all .3s;
   text-decoration: none;
   color: inherit;
+  z-index: 5;
 }
 
 .item-films:hover .item-films__more {

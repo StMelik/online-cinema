@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <div class="film-page">
+    <div class="film-page" :style="isEmpty && {height: 'calc(100vh - 90px)'}">
       <h2 class="film-page__title">{{film.title}}</h2>
-      <img :src="film.imageUrl" :alt="film.title" class="film-page__image">
-      <p class="film-page__content-title">Немного о сюжете:</p>
-      <p class="film-page__content-text">{{film.plot}}</p>
-      <p class="film-page__content-title">Рейтинг:</p>
-      <p class="film-page__content-text">{{film.rating}}</p>
-      <p class="film-page__content-title">Актерский состав:</p>
-      <p class="film-page__content-text">{{film.actors}}</p>
-      <p class="film-page__content-title">Режисеры:</p>
-      <p class="film-page__content-text">{{film.directors}}</p>
+      <img :src="film.imageUrl" :alt="film.title" :style="isEmpty && {height: 'calc(100% - 90px)'}" class="film-page__image">
+      <p v-if="!isEmpty" class="film-page__content-title">Немного о сюжете:</p>
+      <p v-if="!isEmpty" class="film-page__content-text">{{film.plot}}</p>
+      <p v-if="!isEmpty" class="film-page__content-title">Рейтинг:</p>
+      <p v-if="!isEmpty" class="film-page__content-text">{{film.rating}}</p>
+      <p v-if="!isEmpty" class="film-page__content-title">Актерский состав:</p>
+      <p v-if="!isEmpty" class="film-page__content-text">{{film.actors}}</p>
+      <p v-if="!isEmpty" class="film-page__content-title">Режиссеры:</p>
+      <p v-if="!isEmpty" class="film-page__content-text">{{film.directors}}</p>
     </div>
   </div>
 </template>
@@ -22,12 +22,20 @@ export default {
   data() {
     return {
       film: null,
+      isEmpty: false
     }
   },
   created() {
     const film = films.find(film => film.id == this.$route.params.id)
     if (film) {
+      this.isEmpty = false
       this.film = film
+    } else {
+      this.isEmpty = true
+      this.film = {
+        imageUrl: 'https://w-dog.ru/wallpapers/14/2/511224256308748/art-kino-katushka-kinoplenka-xlopushka-popkorn-abstrakciya-3d-oboi.jpg',
+        title: 'Такого фильма еще нет',
+      }
     }
   }
 }
@@ -57,6 +65,8 @@ export default {
 
 .film-page__image {
   margin-bottom: 25px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .film-page__content-title {
