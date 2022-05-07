@@ -1,7 +1,9 @@
 <template>
   <div class="films-layout">
     <MainHeader/>
-    <router-view></router-view>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

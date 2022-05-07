@@ -1,20 +1,23 @@
 <template>
-  <div class="container">
-    <div class="films-page">
-      <h2 class="films-page__title">Выбери фильм на свой вкус</h2>
-      <ul class="films-page__list">
-        <li
-            class="films-page__item item-films"
-            v-for="film in films"
-            :key="film.id"
+  <div class="films-page">
+    <h2 class="films-page__title">Выбери фильм на свой вкус</h2>
+    <ul class="films-page__list">
+      <li
+          class="films-page__item item-films"
+          v-for="film in films"
+          :key="film.id"
+      >
+        <router-link
+            :to="{name: 'film', params: {id: film.id}}"
+            class="item-films__more"
         >
-          <router-link :to="{name: 'film', params: {id: film.id}}" class="item-films__more">Подробнее о фильме</router-link>
-          <img class="item-films__image" :src="film.imageUrl" :alt="film.title">
-          <div class="item-films__rating">{{ film.rating }}</div>
-          <p class="item-films__title">{{ film.title }}</p>
-        </li>
-      </ul>
-    </div>
+          Подробнее о фильме
+        </router-link>
+        <img class="item-films__image" :src="film.imageUrl" :alt="film.title">
+        <div class="item-films__rating">{{ film.rating }}</div>
+        <p class="item-films__title">{{ film.title }}</p>
+      </li>
+    </ul>
   </div>
 </template>
 

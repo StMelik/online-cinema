@@ -1,21 +1,17 @@
 <template>
-  <div class="container">
-    <div class="not-found">
-      <div class="not-found__number">
-        <p class="not-found__number-big">4</p>
-        <p class="not-found__number-small">0</p>
-        <p class="not-found__number-big">4</p>
-      </div>
-      <p class="not-found__text">Ничего не найдено</p>
-      <router-link to="/" class="button not-found__button">Вернуться на главную</router-link>
+  <div class="not-found">
+    <div class="not-found__number">
+      <p class="not-found__number-big">4</p>
+      <p class="not-found__number-small">0</p>
+      <p class="not-found__number-big">4</p>
     </div>
+    <p class="not-found__text">Ничего не найдено</p>
+    <router-link to="/" class="button not-found__button">Вернуться на главную</router-link>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style scoped>
