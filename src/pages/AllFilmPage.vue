@@ -8,7 +8,7 @@
             v-for="film in films"
             :key="film.id"
         >
-          <p class="item-films__more">Подробнее о фильме</p>
+          <router-link :to="{name: 'film', params: {id: film.id}}" class="item-films__more">Подробнее о фильме</router-link>
           <img class="item-films__image" :src="film.imageUrl" :alt="film.title">
           <div class="item-films__rating">{{ film.rating }}</div>
           <p class="item-films__title">{{ film.title }}</p>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {films} from "@/utils/films";
+import films from "@/utils/films";
 
 export default {
   data() {
@@ -64,6 +64,8 @@ export default {
   height: 100%;
   background-color: rgba(17, 17, 17, 0.5);
   transition: all .3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .item-films:hover .item-films__more {

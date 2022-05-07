@@ -2,7 +2,7 @@
   <div class="container">
     <div class="main-page">
       <h1 class="main-title">Онлайн кинотеатр</h1>
-      <button class="button">Перейти к фильмам</button>
+      <button class="button" @click="$router.push({name: 'films'})">Перейти к фильмам</button>
     </div>
   </div>
 </template>

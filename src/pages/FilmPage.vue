@@ -1,29 +1,33 @@
 <template>
   <div class="container">
     <div class="film-page">
-      <h2 class="film-page__title">{{films[0].title}}</h2>
-      <img :src="films[0].imageUrl" :alt="films[0].title" class="film-page__image">
+      <h2 class="film-page__title">{{film.title}}</h2>
+      <img :src="film.imageUrl" :alt="film.title" class="film-page__image">
       <p class="film-page__content-title">Немного о сюжете:</p>
-      <p class="film-page__content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci asperiores
-        doloremque et ex facere, illum, ipsa labore nemo possimus quod saepe sit soluta velit vero vitae? Eaque officia
-        quae sed.</p>
+      <p class="film-page__content-text">{{film.plot}}</p>
       <p class="film-page__content-title">Рейтинг:</p>
-      <p class="film-page__content-text">{{films[0].rating}}</p>
+      <p class="film-page__content-text">{{film.rating}}</p>
       <p class="film-page__content-title">Актерский состав:</p>
-      <p class="film-page__content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, provident?</p>
+      <p class="film-page__content-text">{{film.actors}}</p>
       <p class="film-page__content-title">Режисеры:</p>
-      <p class="film-page__content-text">Lorem ipsum dolor sit amet.</p>
+      <p class="film-page__content-text">{{film.directors}}</p>
     </div>
   </div>
 </template>
 
 <script>
-import {films} from "@/utils/films";
+import films from "@/utils/films";
 
 export default {
   data() {
     return {
-      films
+      film: null,
+    }
+  },
+  created() {
+    const film = films.find(film => film.id == this.$route.params.id)
+    if (film) {
+      this.film = film
     }
   }
 }
