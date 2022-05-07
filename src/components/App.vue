@@ -1,13 +1,13 @@
 <template>
   <div>
-    <MainPage/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MainPage from "@/components/MainPage";
+
 export default {
-  components: {MainPage}
+
 }
 </script>
 
@@ -23,21 +23,41 @@ body {
   margin: 0;
 }
 
-h1 {
+h1,
+h2,
+p {
   margin: 0;
+}
+
+img {
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   max-width: 1140px;
   padding: 0 15px;
+  margin: 0 auto;
 }
 
 .button {
+  font-size: 16px;
   border: 1px solid #eeeeee;
   border-radius: 5px;
   background-color: transparent;
   color: #eeeeee;
   padding: 10px;
   cursor: pointer;
+  transition: all .3s;
+}
+
+.button:hover {
+  background-color: #eeeeee;
+  color: #111111;
 }
 </style>
