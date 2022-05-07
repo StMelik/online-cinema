@@ -76,6 +76,7 @@ export default {
 .item-films__image {
   object-fit: cover;
   object-position: center;
+  height: 100%;
 }
 
 .item-films__rating {

@@ -31,6 +31,7 @@ p {
 
 img {
   width: 100%;
+  display: block;
 }
 
 ul {
