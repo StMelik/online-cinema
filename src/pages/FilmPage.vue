@@ -34,19 +34,17 @@
 </template>
 
 <script>
-import films from "@/utils/films";
-import reactions from "@/utils/reactions";
+import {mapGetters} from "vuex"
 
 export default {
   data() {
     return {
       film: null,
       isEmpty: false,
-      reactions
     }
   },
   created() {
-    const film = films.find(film => film.id == this.$route.params.id)
+    const film = this.films.find(film => film.id == this.$route.params.id)
     if (film) {
       this.isEmpty = false
       this.film = film
@@ -56,6 +54,18 @@ export default {
         imageUrl: 'https://w-dog.ru/wallpapers/14/2/511224256308748/art-kino-katushka-kinoplenka-xlopushka-popkorn-abstrakciya-3d-oboi.jpg',
         title: 'Такого фильма еще нет',
       }
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getReactions: 'reactions/getReactions',
+      getFilms: 'films/getFilms'
+    }),
+    reactions() {
+      return this.getReactions
+    },
+    films() {
+      return this.getFilms
     }
   }
 }
