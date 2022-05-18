@@ -1,21 +1,21 @@
 <template>
-  <div class="film-page" :style="isEmpty && {height: 'calc(100vh - 90px)'}">
-    <h2 class="film-page__title">{{ film.title }}</h2>
+  <p v-if="isLoadingFilmInfo">Загрузка</p>
+  <div v-else class="film-page">
+    <h2 class="film-page__title">{{ filmInfo.name }}</h2>
     <img
-        :src="film.imageUrl"
-        :alt="film.title"
-        :style="isEmpty && {height: 'calc(100% - 90px)'}"
+        :src="filmInfo.image"
+        :alt="filmInfo.name"
         class="film-page__image"
     >
     <div class="film-page__description-box">
-      <p v-if="!isEmpty" class="film-page__content-title">Немного о сюжете:</p>
-      <p v-if="!isEmpty" class="film-page__content-text">{{ film.plot }}</p>
-      <p v-if="!isEmpty" class="film-page__content-title">Рейтинг:</p>
-      <p v-if="!isEmpty" class="film-page__content-text">{{ film.rating }}</p>
-      <p v-if="!isEmpty" class="film-page__content-title">Актерский состав:</p>
-      <p v-if="!isEmpty" class="film-page__content-text">{{ film.actors }}</p>
-      <p v-if="!isEmpty" class="film-page__content-title">Режиссеры:</p>
-      <p v-if="!isEmpty" class="film-page__content-text">{{ film.directors }}</p>
+      <p class="film-page__content-title">Немного о сюжете:</p>
+      <p class="film-page__content-text">{{ filmInfo.description }}</p>
+      <p class="film-page__content-title">Рейтинг:</p>
+      <p class="film-page__content-text">{{ filmInfo.rating }}</p>
+      <p class="film-page__content-title">Актерский состав:</p>
+      <p class="film-page__content-text">{{ filmActors }}</p>
+      <p class="film-page__content-title">Режиссеры:</p>
+      <p class="film-page__content-text">{{ filmDirectors }}</p>
     </div>
     <div class="film-page__review-box">
       <p class="film-page__review-title">Смотрели данный фильм?</p>
@@ -34,39 +34,64 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex"
 
 export default {
-  data() {
-    return {
-      film: null,
-      isEmpty: false,
+  // data() {
+  //   return {
+  //     isEmpty: false,
+  //   }
+  // },
+
+  methods: {
+    ...mapMutations({
+      setIsLoadingFilmInfo: 'SET_IS_LOADING_FILM_INFO'
+    }),
+
+    ...mapActions({
+      loadFilmInfo: 'films/loadFilmInfo',
+      loadFilmStaff: "films/loadFilmStaff"
+    }),
+
+    async getFilmInfo(filmId) {
+      await this.loadFilmInfo(filmId)
+      await this.loadFilmStaff(filmId)
+      this.setIsLoadingFilmInfo(false)
     }
   },
+
   created() {
-    const film = this.films.find(film => film.id == this.$route.params.id)
-    if (film) {
-      this.isEmpty = false
-      this.film = film
-    } else {
-      this.isEmpty = true
-      this.film = {
-        imageUrl: 'https://w-dog.ru/wallpapers/14/2/511224256308748/art-kino-katushka-kinoplenka-xlopushka-popkorn-abstrakciya-3d-oboi.jpg',
-        title: 'Такого фильма еще нет',
-      }
-    }
+    this.getFilmInfo(this.$route.params.id)
+
+    // const film = this.films.find(film => film.kinopoiskId == this.$route.params.id)
+    // console.log(this.films)
+    // console.log(this.$route.params.id)
+    // console.log(film)
+    // if (film) {
+    //   this.isEmpty = false
+    //   this.film = film
+    // } else {
+    //   this.isEmpty = true
+    //   this.film = {
+    //     imageUrl: 'https://w-dog.ru/wallpapers/14/2/511224256308748/art-kino-katushka-kinoplenka-xlopushka-popkorn-abstrakciya-3d-oboi.jpg',
+    //     title: 'Такого фильма еще нет',
+    //   }
+    // }
+
+
   },
   computed: {
-    ...mapGetters({
-      getReactions: 'reactions/getReactions',
-      getFilms: 'films/getFilms'
+    ...mapState({
+      isLoadingFilmInfo: state => state.isLoadingFilmInfo,
+      films: state => state.films.films,
+      filmInfo: state => state.films.filmInfo,
+      reactions: state => state.reactions.reactions
     }),
-    reactions() {
-      return this.getReactions
-    },
-    films() {
-      return this.getFilms
-    }
+
+    ...mapGetters({
+      filmDirectors: "films/getFilmDirectors",
+      filmActors: "films/getFilmActors",
+    })
   }
 }
 </script>

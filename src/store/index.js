@@ -1,30 +1,31 @@
 import {createStore} from 'vuex'
-import reactionsModule from '@/store/reactions'
-import filmsModule from '@/store/films'
+import reactions from '@/store/reactions'
+import films from '@/store/films'
 
 const store = createStore({
     state() {
         return {
-            count: 5,
-            isLoadingFilms: true
+            isLoadingFilms: true,
+            isLoadingFilmInfo: true,
         }
     },
     getters: {
-        getIsLoadingFilms(state) {
-            return state.isLoadingFilms
-        }
     },
     mutations: {
         SET_IS_LOADING_FILMS(state, payload) {
             state.isLoadingFilms = payload
-        }
+        },
+
+        SET_IS_LOADING_FILM_INFO(state, payload) {
+            state.isLoadingFilmInfo = payload
+        },
     },
     actions: {
 
     },
     modules: {
-        reactions: reactionsModule,
-        films: filmsModule
+        reactions,
+        films
     }
 })
 

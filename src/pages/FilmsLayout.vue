@@ -12,27 +12,31 @@
 
 <script>
 import MainHeader from "@/components/MainHeader";
-import {mapActions, mapGetters} from "vuex"
+import {mapActions, mapState} from "vuex"
 export default {
   components: {MainHeader},
+
   methods: {
     ...mapActions({
-      loadReactions: 'reactions/loadReactions',
-      loadFilms: 'films/loadFilms'
+      loadFilms: 'films/loadFilms',
+      loadFilmInfo: 'films/loadFilmInfo',
+      loadFilmImage: 'films/loadFilmImage',
+      loadFilmStaff: 'films/loadFilmStaff',
+      loadReactions: 'reactions/loadReactions'
     })
   },
-  created() {
-    this.loadReactions(3000)
-    this.loadFilms(1000)
-  },
+
   computed: {
-    ...mapGetters({
-      getLoading: "getIsLoadingFilms"
+    ...mapState({
+      isLoading: state => state.isLoadingFilms
     }),
-    isLoading() {
-      return this.getLoading
-    }
+  },
+
+  created() {
+    this.loadReactions(100)
+    this.loadFilms(2)
   }
+
 }
 </script>
 

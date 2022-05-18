@@ -12,13 +12,10 @@ export default {
     namespaced: true,
     state() {
         return {
-
+            reactions: []
         }
     },
     getters: {
-        getReactions(state) {
-            return state.reactions
-        }
     },
     mutations: {
         SET_REACTIONS(state, payload) {
