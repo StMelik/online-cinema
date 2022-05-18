@@ -8,7 +8,8 @@ const store = createStore({
             isLoadingFilmInfo: true,
             page: 1,
             totalPages: null,
-            favoriteFilms: []
+            favoriteFilms: [],
+            isFavoriteFilm: false,
         }
     },
     getters: {
@@ -28,7 +29,19 @@ const store = createStore({
 
         SET_TOTAL_PAGE(state, payload) {
             state.totalPages = payload
-        }
+        },
+
+        ADD_FAVORITE_FILM(state, payload) {
+            state.favoriteFilms.push(payload)
+        },
+
+        REMOVE_FAVORITE_FILM(state, payload) {
+            state.favoriteFilms = [...state.favoriteFilms.filter(film => film !== payload)]
+        },
+
+        SET_IS_FAVORITE_FILM(state, payload) {
+            state.isFavoriteFilm = payload
+        },
     },
     actions: {
 

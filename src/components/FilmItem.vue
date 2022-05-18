@@ -6,7 +6,11 @@
     >
       Подробнее о фильме
     </router-link>
-    <button class="item-films__favorite-button item-films__favorite-button_active"></button>
+    <button
+        class="item-films__favorite-button"
+        @click="handleClickFavorite(film)"
+        :class="favoriteFilms.includes(film) && 'item-films__favorite-button_active'"
+    ></button>
     <img class="item-films__image" :src="film.posterUrlPreview" :alt="film.nameRu">
     <div class="item-films__rating">{{ film.ratingKinopoisk }}</div>
     <p class="item-films__title">{{ film.nameRu }}</p>
@@ -14,13 +18,38 @@
 </template>
 
 <script>
+import {mapMutations, mapState} from "vuex";
+
 export default {
+
   props: {
     film: Object,
   },
 
-  mounted() {
+  methods: {
+    ...mapMutations({
+      addFavoriteFilm: "ADD_FAVORITE_FILM",
+      removeFavoriteFilm: "REMOVE_FAVORITE_FILM",
+    }),
 
+    handleClickFavorite(film) {
+      const isFavoriteFilm = this.favoriteFilms.includes(film)
+      if (!isFavoriteFilm) {
+        this.addFavoriteFilm(film)
+      } else {
+        this.removeFavoriteFilm(film)
+      }
+    }
+  },
+
+  computed: {
+    ...mapState({
+      favoriteFilms: state => state.favoriteFilms
+    })
+  },
+
+  mounted() {
+    // console.log(this.film)
   }
 }
 </script>

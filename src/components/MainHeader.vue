@@ -21,7 +21,7 @@
           <button
               :class="$route.path === '/favorites' && 'header__button_active'"
               class="button header__button"
-              @click="$router.push({name: 'favoritesLayout'})"
+              @click="$router.push({name: 'favorites'})"
           >
             Мои избранные
           </button>

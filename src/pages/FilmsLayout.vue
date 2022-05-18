@@ -35,7 +35,7 @@ export default {
   },
 
   created() {
-    this.loadReactions(100)
+    // this.loadReactions(100)
     this.loadFilms({page: this.page})
   }
 
