@@ -33,12 +33,6 @@
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex"
 
 export default {
-  // data() {
-  //   return {
-  //     isEmpty: false,
-  //   }
-  // },
-
   methods: {
     ...mapMutations({
       setIsLoadingFilmInfo: 'loader/SET_IS_LOADING_FILM_INFO'
@@ -47,29 +41,12 @@ export default {
     ...mapActions({
       loadFilmInfo: 'filmInfo/loadFilmInfo',
     }),
-
   },
 
   created() {
     this.loadFilmInfo(this.$route.params.id)
-
-    // const film = this.films.find(film => film.kinopoiskId == this.$route.params.id)
-    // console.log(this.films)
-    // console.log(this.$route.params.id)
-    // console.log(film)
-    // if (film) {
-    //   this.isEmpty = false
-    //   this.film = film
-    // } else {
-    //   this.isEmpty = true
-    //   this.film = {
-    //     imageUrl: 'https://w-dog.ru/wallpapers/14/2/511224256308748/art-kino-katushka-kinoplenka-xlopushka-popkorn-abstrakciya-3d-oboi.jpg',
-    //     title: 'Такого фильма еще нет',
-    //   }
-    // }
-
-
   },
+
   computed: {
     ...mapState({
       isLoadingFilmInfo: state => state.loader.isLoadingFilmInfo,
@@ -108,10 +85,6 @@ export default {
   font-size: 20px;
 }
 
-.film-page__content-text {
-
-}
-
 .film-page p:not(:last-of-type) {
   margin-bottom: 10px;
 }
@@ -134,23 +107,5 @@ export default {
 
 .film-page__review-box {
   padding-top: 30px;
-}
-
-.film-page__review-title {
-  font-size: 24px;
-}
-
-.film-page__review-text {
-  margin-bottom: 15px;
-  color: #e15353;
-}
-
-.film-page__review-list {
-  display: flex;
-  gap: 15px;
-}
-
-.film-page__review-item {
-
 }
 </style>

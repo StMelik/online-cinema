@@ -14,16 +14,13 @@
 import MainHeader from "@/components/MainHeader";
 import {mapActions, mapState} from "vuex"
 import MyPreloader from "@/components/MyPreloader";
+
 export default {
   components: {MyPreloader, MainHeader},
 
   methods: {
     ...mapActions({
       loadFilms: 'films/loadFilms',
-      // loadFilmInfo: 'films/loadFilmInfo',
-      // loadFilmImage: 'films/loadFilmImage',
-      // loadFilmStaff: 'films/loadFilmStaff',
-      // loadReactions: 'reactions/loadReactions'
     })
   },
 
@@ -35,7 +32,6 @@ export default {
   },
 
   created() {
-    // this.loadReactions(100)
     this.loadFilms({page: this.page})
   }
 
@@ -49,5 +45,4 @@ export default {
   align-items: center;
   height: calc(100vh - 90px);
 }
-
 </style>

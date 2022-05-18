@@ -21,7 +21,6 @@
 import {mapMutations, mapState} from "vuex";
 
 export default {
-
   props: {
     film: Object,
   },
@@ -47,10 +46,6 @@ export default {
       favoriteFilms: state => state.favorite.favoriteFilms
     })
   },
-
-  mounted() {
-    // console.log(this.film)
-  }
 }
 </script>
 

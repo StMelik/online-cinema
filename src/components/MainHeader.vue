@@ -26,7 +26,7 @@
             Мои избранные
           </button>
         </div>
-        <button class="button header__login" @click="changeAuthStatus">{{isAuth ? 'Выйти' : 'Войти'}}</button>
+        <button class="button header__login" @click="changeAuthStatus">{{ isAuth ? 'Выйти' : 'Войти' }}</button>
       </div>
     </div>
   </header>

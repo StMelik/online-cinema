@@ -8,9 +8,7 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style scoped>
@@ -21,6 +19,7 @@ export default {
   justify-content: center;
   height: 100vh;
 }
+
 .main-title {
   font-size: 72px;
   text-align: center;

@@ -7,7 +7,7 @@
         :class="p == page && 'films-pagination__item_active'"
         @click="handleClickPage(p)"
     >
-      {{p}}
+      {{ p }}
     </li>
   </ul>
 </template>
@@ -37,7 +37,6 @@ export default {
   },
   computed: {
     ...mapState({
-      // films: state => state.films.films,
       filmsFilter: state => state.filmsFilter.filter,
       page: state => state.pagination.page,
       totalPages: state => state.pagination.totalPages

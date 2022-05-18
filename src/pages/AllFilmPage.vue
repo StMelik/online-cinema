@@ -4,9 +4,9 @@
     <h2 class="films-page__title">Выбери фильм на свой вкус</h2>
     <ul class="films-page__list">
       <FilmItem
-        v-for="film in films"
-        :key="film.kinopoiskId"
-        :film="film"
+          v-for="film in films"
+          :key="film.kinopoiskId"
+          :film="film"
       />
     </ul>
     <FilmsPagination/>

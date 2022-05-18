@@ -1,11 +1,10 @@
+import {createRouter, createWebHistory} from "vue-router";
 import AllFilmPage from "@/pages/AllFilmPage";
 import MainPage from "@/components/MainPage";
-import {createRouter, createWebHistory} from "vue-router";
 import FilmPage from "@/pages/FilmPage";
 import NotFound from "@/pages/NotFound";
 import FilmsLayout from "@/pages/FilmsLayout";
 import FavoriteFilmsPage from "@/pages/FavoriteFilmsPage";
-
 
 const routes = [
     {
