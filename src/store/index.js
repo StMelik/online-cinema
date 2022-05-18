@@ -1,5 +1,4 @@
 import {createStore} from 'vuex'
-import reactions from '@/store/reactions'
 import films from '@/store/films'
 
 const store = createStore({
@@ -34,7 +33,6 @@ const store = createStore({
 
     },
     modules: {
-        reactions,
         films
     }
 })

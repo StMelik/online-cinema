@@ -20,15 +20,7 @@
     <div class="film-page__review-box">
       <p class="film-page__review-title">Смотрели данный фильм?</p>
       <p class="film-page__review-text">Оставьте отзыв:</p>
-      <ul class="film-page__review-list">
-        <li
-            v-for="reaction in reactions"
-            :key="reaction.id"
-            class="button film-page__review-item"
-        >
-          {{reaction.title}}
-        </li>
-      </ul>
+
     </div>
   </div>
 </template>
@@ -85,7 +77,6 @@ export default {
       isLoadingFilmInfo: state => state.isLoadingFilmInfo,
       films: state => state.films.films,
       filmInfo: state => state.films.filmInfo,
-      reactions: state => state.reactions.reactions
     }),
 
     ...mapGetters({
