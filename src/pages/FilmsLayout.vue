@@ -3,7 +3,7 @@
     <MainHeader/>
     <div class="container">
       <div v-if="isLoading" class="preloader">
-        <p class="preloader__text">ЗАГРУЗКА...</p>
+        <MyPreloader/>
       </div>
       <router-view v-else></router-view>
     </div>
@@ -13,8 +13,9 @@
 <script>
 import MainHeader from "@/components/MainHeader";
 import {mapActions, mapState} from "vuex"
+import MyPreloader from "@/components/MyPreloader";
 export default {
-  components: {MainHeader},
+  components: {MyPreloader, MainHeader},
 
   methods: {
     ...mapActions({
@@ -28,13 +29,14 @@ export default {
 
   computed: {
     ...mapState({
-      isLoading: state => state.isLoadingFilms
+      isLoading: state => state.isLoadingFilms,
+      page: state => state.page
     }),
   },
 
   created() {
     this.loadReactions(100)
-    this.loadFilms(2)
+    this.loadFilms({page: this.page})
   }
 
 }
@@ -48,8 +50,4 @@ export default {
   height: calc(100vh - 90px);
 }
 
-.preloader__text {
-  font-size: 82px;
-  color: teal;
-}
 </style>
