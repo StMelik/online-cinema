@@ -19,6 +19,7 @@
             Сериалы
           </button>
           <button
+              v-if="isAuth"
               :class="$route.path === '/favorites' && 'header__button_active'"
               class="button header__button"
               @click="$router.push({name: 'favorites'})"
@@ -33,29 +34,37 @@
 </template>
 
 <script>
+import {mapMutations, mapState} from "vuex";
+
 export default {
-  data() {
-    return {
-      isAuth: false,
-    }
-  },
-  created() {
-    if (localStorage.getItem('auth')) {
-      this.isAuth = true
-    }
-  },
   methods: {
+    ...mapMutations({
+      setIsAuth: "auth/SET_IS_AUTH"
+    }),
+
     changeAuthStatus() {
       if (!this.isAuth) {
         localStorage.setItem('auth', true);
-        this.isAuth = true
+        this.setIsAuth(true)
       } else {
         localStorage.removeItem('auth');
-        this.isAuth = false
+        this.setIsAuth(false)
         this.$router.push({name: 'films'})
       }
     }
-  }
+  },
+
+  computed: {
+    ...mapState({
+      isAuth: state => state.auth.isAuth
+    })
+  },
+
+  created() {
+    if (localStorage.getItem('auth')) {
+      this.setIsAuth(true)
+    }
+  },
 }
 </script>
 

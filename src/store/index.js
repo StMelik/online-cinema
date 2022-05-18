@@ -5,6 +5,7 @@ import filmInfo from "@/store/films/filmInfo";
 import favorite from "@/store/favorite";
 import pagination from "@/store/pagination";
 import loader from "@/store/loader";
+import auth from "@/store/auth";
 
 const store = createStore({
     state() {
@@ -14,6 +15,7 @@ const store = createStore({
     mutations: {},
     actions: {},
     modules: {
+        auth,
         films,
         favorite,
         pagination,

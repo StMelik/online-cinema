@@ -7,6 +7,7 @@
       Подробнее о фильме
     </router-link>
     <button
+        v-if="isAuth"
         class="item-films__favorite-button"
         @click="handleClickFavorite"
         :class="isFavoriteFilm && 'item-films__favorite-button_active'"
@@ -44,7 +45,8 @@ export default {
 
   computed: {
     ...mapState({
-      favoriteFilms: state => state.favorite.favoriteFilms
+      favoriteFilms: state => state.favorite.favoriteFilms,
+      isAuth: state => state.auth.isAuth,
     }),
 
     isFavoriteFilm() {
