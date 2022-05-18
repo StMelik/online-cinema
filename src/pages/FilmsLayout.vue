@@ -12,16 +12,20 @@
 
 <script>
 import MainHeader from "@/components/MainHeader";
-import {mapActions, mapState} from "vuex"
+import {mapActions, mapMutations, mapState} from "vuex"
 import MyPreloader from "@/components/MyPreloader";
 
 export default {
   components: {MyPreloader, MainHeader},
 
   methods: {
+    ...mapMutations({
+      loadFavoriteFilms: 'favorite/LOAD_FAVORITE_FILMS'
+    }),
+
     ...mapActions({
       loadFilms: 'films/loadFilms',
-    })
+    }),
   },
 
   computed: {
@@ -32,8 +36,11 @@ export default {
   },
 
   created() {
+    if (localStorage.getItem('favoriteFilms')) {
+      this.loadFavoriteFilms(JSON.parse(localStorage.getItem('favoriteFilms')))
+    }
     this.loadFilms({page: this.page})
-  }
+  },
 
 }
 </script>

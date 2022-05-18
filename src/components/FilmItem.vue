@@ -8,8 +8,8 @@
     </router-link>
     <button
         class="item-films__favorite-button"
-        @click="handleClickFavorite(film)"
-        :class="favoriteFilms.includes(film) && 'item-films__favorite-button_active'"
+        @click="handleClickFavorite"
+        :class="isFavoriteFilm && 'item-films__favorite-button_active'"
     ></button>
     <img class="item-films__image" :src="film.posterUrlPreview" :alt="film.nameRu">
     <div class="item-films__rating">{{ film.ratingKinopoisk }}</div>
@@ -31,20 +31,25 @@ export default {
       removeFavoriteFilm: "favorite/REMOVE_FAVORITE_FILM",
     }),
 
-    handleClickFavorite(film) {
-      const isFavoriteFilm = this.favoriteFilms.includes(film)
-      if (!isFavoriteFilm) {
-        this.addFavoriteFilm(film)
+    handleClickFavorite() {
+      if (!this.isFavoriteFilm) {
+        this.addFavoriteFilm(this.film)
+        localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilms))
       } else {
-        this.removeFavoriteFilm(film)
+        this.removeFavoriteFilm(this.film)
+        localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilms))
       }
-    }
+    },
   },
 
   computed: {
     ...mapState({
       favoriteFilms: state => state.favorite.favoriteFilms
-    })
+    }),
+
+    isFavoriteFilm() {
+      return Boolean(this.favoriteFilms.find(film => film.kinopoiskId === this.film.kinopoiskId))
+    }
   },
 }
 </script>
