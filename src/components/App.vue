@@ -36,6 +36,10 @@ ul {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1140px;
   padding: 0 15px;

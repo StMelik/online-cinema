@@ -18,9 +18,13 @@
       <p class="film-page__content-text">{{ filmDirectors }}</p>
     </div>
     <div class="film-page__review-box">
-      <p class="film-page__review-title">Смотрели данный фильм?</p>
-      <p class="film-page__review-text">Оставьте отзыв:</p>
-
+      <a
+          class="button film-page__link"
+          :href="filmInfo.webUrl"
+          target="_blank"
+      >
+        Смотреть фильм на кинопоиске
+      </a>
     </div>
   </div>
 </template>

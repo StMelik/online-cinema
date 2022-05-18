@@ -10,6 +10,7 @@ export default {
                 description: '',
                 rating: 0,
                 image: null,
+                webUrl: '',
                 directors: [],
                 actors: []
             },
@@ -53,6 +54,7 @@ export default {
             state.filmInfo.description = filmInfo.description
             state.filmInfo.rating = filmInfo.ratingKinopoisk
             state.filmInfo.image = filmInfo.coverUrl
+            state.filmInfo.webUrl = filmInfo.webUrl
         },
 
         SET_FILM_STAFF(state, filmStaff) {
