@@ -8,6 +8,7 @@ const store = createStore({
             isLoadingFilmInfo: true,
             page: 1,
             totalPages: null,
+            favoriteFilms: []
         }
     },
     getters: {

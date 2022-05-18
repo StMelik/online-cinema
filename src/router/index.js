@@ -4,6 +4,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import FilmPage from "@/pages/FilmPage";
 import NotFound from "@/pages/NotFound";
 import FilmsLayout from "@/pages/FilmsLayout";
+import FavoriteFilmsPage from "@/pages/FavoriteFilmsPage";
 
 
 const routes = [
@@ -44,6 +45,18 @@ const routes = [
         path: '/serials',
         name: 'serials',
         component: NotFound
+    },
+    {
+        path: '/favorites',
+        name: 'favoritesLayout',
+        component: FilmsLayout,
+        children: [
+            {
+                path: '',
+                name: 'favorites',
+                component: FavoriteFilmsPage
+            }
+        ]
     },
     {
         path: '/:catchAll(.*)',

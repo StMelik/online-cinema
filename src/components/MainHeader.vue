@@ -4,8 +4,27 @@
       <div class="header__wrapper">
         <div class="header__logo" @click="$router.push({name: 'main'})">Кинотеатр</div>
         <div class="header__buttons">
-          <button :class="$route.path === '/films' && 'header__button_active'" class="button header__button" @click="$router.push({name: 'films'})">Фильмы</button>
-          <button :class="$route.path === '/serials' && 'header__button_active'" class="button header__button" @click="$router.push({name: 'serials'})">Сериалы</button>
+          <button
+              :class="$route.path === '/films' && 'header__button_active'"
+              class="button header__button"
+              @click="$router.push({name: 'films'})"
+          >
+            Фильмы
+          </button>
+          <button
+              :class="$route.path === '/serials' && 'header__button_active'"
+              class="button header__button"
+              @click="$router.push({name: 'serials'})"
+          >
+            Сериалы
+          </button>
+          <button
+              :class="$route.path === '/favorites' && 'header__button_active'"
+              class="button header__button"
+              @click="$router.push({name: 'favoritesLayout'})"
+          >
+            Мои избранные
+          </button>
         </div>
         <button class="button header__login" @click="changeAuthStatus">{{isAuth ? 'Выйти' : 'Войти'}}</button>
       </div>

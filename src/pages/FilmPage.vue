@@ -1,7 +1,10 @@
 <template>
   <p v-if="isLoadingFilmInfo">Загрузка</p>
   <div v-else class="film-page">
-    <h2 class="film-page__title">{{ filmInfo.name }}</h2>
+    <div class="film-page__top">
+      <h2 class="film-page__title">{{ filmInfo.name }}</h2>
+      <button class="film-page__favorite-button"></button>
+    </div>
     <img
         :src="filmInfo.image"
         :alt="filmInfo.name"
@@ -96,11 +99,33 @@ export default {
   padding: 30px 0;
 }
 
-.film-page__title {
+.film-page__top {
   position: relative;
-  font-size: 32px;
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
   padding-bottom: 10px;
   margin-bottom: 30px;
+}
+
+.film-page__title {
+  font-size: 32px;
+}
+
+.film-page__favorite-button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  background-image: url('@/images/heart-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.film-page__favorite-button_active {
+  background-image: url('@/images/heart-active-icon.svg');
 }
 
 .film-page__image {
@@ -127,7 +152,7 @@ export default {
   padding-bottom: 15px;
 }
 
-.film-page__title::after,
+.film-page__top::after,
 .film-page__description-box::after {
   content: '';
   position: absolute;

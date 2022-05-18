@@ -6,6 +6,7 @@
     >
       Подробнее о фильме
     </router-link>
+    <button class="item-films__favorite-button item-films__favorite-button_active"></button>
     <img class="item-films__image" :src="film.posterUrlPreview" :alt="film.nameRu">
     <div class="item-films__rating">{{ film.ratingKinopoisk }}</div>
     <p class="item-films__title">{{ film.nameRu }}</p>
@@ -53,6 +54,27 @@ export default {
 .item-films:hover .item-films__more {
   visibility: visible;
   opacity: 1;
+}
+
+.item-films__favorite-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 39px;
+  height: 39px;
+  z-index: 10;
+  border: none;
+  border-radius: 0 0 10px 0;
+  background-color: rgba(255, 50, 50, 0.7);
+  background-image: url('@/images/heart-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+  cursor: pointer;
+}
+
+.item-films__favorite-button_active {
+  background-image: url('@/images/heart-active-icon.svg');
 }
 
 .item-films__image {
