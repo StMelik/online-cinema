@@ -20,7 +20,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      setPage: "SET_PAGE"
+      setPage: "pagination/SET_PAGE"
     }),
 
     ...mapActions({
@@ -38,9 +38,9 @@ export default {
   computed: {
     ...mapState({
       // films: state => state.films.films,
-      filmsFilter: state => state.films.filmsFilter,
-      page: state => state.page,
-      totalPages: state => state.totalPages
+      filmsFilter: state => state.filmsFilter.filter,
+      page: state => state.pagination.page,
+      totalPages: state => state.pagination.totalPages
     }),
   },
 }

@@ -41,12 +41,12 @@ export default {
 
   methods: {
     ...mapMutations({
-      setIsLoadingFilmInfo: 'SET_IS_LOADING_FILM_INFO'
+      setIsLoadingFilmInfo: 'loader/SET_IS_LOADING_FILM_INFO'
     }),
 
     ...mapActions({
-      loadFilmInfo: 'films/loadFilmInfo',
-      loadFilmStaff: "films/loadFilmStaff"
+      loadFilmInfo: 'filmInfo/loadFilmInfo',
+      loadFilmStaff: "filmInfo/loadFilmStaff"
     }),
 
     async getFilmInfo(filmId) {
@@ -78,14 +78,14 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoadingFilmInfo: state => state.isLoadingFilmInfo,
+      isLoadingFilmInfo: state => state.loader.isLoadingFilmInfo,
       films: state => state.films.films,
-      filmInfo: state => state.films.filmInfo,
+      filmInfo: state => state.filmInfo,
     }),
 
     ...mapGetters({
-      filmDirectors: "films/getFilmDirectors",
-      filmActors: "films/getFilmActors",
+      filmDirectors: "filmInfo/getFilmDirectors",
+      filmActors: "filmInfo/getFilmActors",
     })
   }
 }

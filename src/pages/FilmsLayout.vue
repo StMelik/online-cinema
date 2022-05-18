@@ -20,17 +20,17 @@ export default {
   methods: {
     ...mapActions({
       loadFilms: 'films/loadFilms',
-      loadFilmInfo: 'films/loadFilmInfo',
-      loadFilmImage: 'films/loadFilmImage',
-      loadFilmStaff: 'films/loadFilmStaff',
-      loadReactions: 'reactions/loadReactions'
+      // loadFilmInfo: 'films/loadFilmInfo',
+      // loadFilmImage: 'films/loadFilmImage',
+      // loadFilmStaff: 'films/loadFilmStaff',
+      // loadReactions: 'reactions/loadReactions'
     })
   },
 
   computed: {
     ...mapState({
-      isLoading: state => state.isLoadingFilms,
-      page: state => state.page
+      isLoading: state => state.loader.isLoadingFilms,
+      page: state => state.pagination.page
     }),
   },
 

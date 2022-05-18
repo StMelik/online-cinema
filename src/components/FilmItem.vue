@@ -28,8 +28,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      addFavoriteFilm: "ADD_FAVORITE_FILM",
-      removeFavoriteFilm: "REMOVE_FAVORITE_FILM",
+      addFavoriteFilm: "favorite/ADD_FAVORITE_FILM",
+      removeFavoriteFilm: "favorite/REMOVE_FAVORITE_FILM",
     }),
 
     handleClickFavorite(film) {
@@ -44,7 +44,7 @@ export default {
 
   computed: {
     ...mapState({
-      favoriteFilms: state => state.favoriteFilms
+      favoriteFilms: state => state.favorite.favoriteFilms
     })
   },
 

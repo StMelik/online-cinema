@@ -68,8 +68,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      setFilmsFilter: "films/SET_FILMS_FILTER",
-      setPage: "SET_PAGE"
+      setFilmsFilter: "filmsFilter/SET_FILMS_FILTER",
+      setPage: "pagination/SET_PAGE"
     }),
 
     ...mapActions({
@@ -100,8 +100,8 @@ export default {
   },
   computed: {
     ...mapState({
-      filmsFilter: state => state.films.filmsFilter,
-      page: state => state.page
+      filmsFilter: state => state.filmsFilter.filter,
+      page: state => state.pagination.page
     }),
   },
 }

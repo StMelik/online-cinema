@@ -27,7 +27,7 @@ export default {
   components: {FilmItem},
   computed: {
     ...mapState({
-      favoriteFilms: state => state.favoriteFilms
+      favoriteFilms: state => state.favorite.favoriteFilms
     })
   }
 }
