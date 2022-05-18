@@ -54,9 +54,12 @@ export default {
             try {
                 commit('loader/SET_IS_LOADING_FILM_INFO', true, {root: true})
                 const filmInfo = await fetchDataFilm(filmId)
+                const filmStaff = await fetchStaffFilm(filmId)
                 commit('SET_FILM_INFO', filmInfo.data)
-                // commit('SET_IS_LOADING_FILMS', false, {root: true})
+                commit('SET_FILM_STAFF', filmStaff.data)
+                commit('loader/SET_IS_LOADING_FILM_INFO', false, {root: true})
                 console.log('filmInfo', filmInfo.data)
+                console.log('filmStaff', filmStaff.data)
                 console.log('Информация о фильме загрузилась')
             } catch (err) {
                 console.log(err)
@@ -75,16 +78,6 @@ export default {
         //     }
         // },
 
-        async loadFilmStaff({commit}, filmId) {
-            try {
-                const filmStaff = await fetchStaffFilm(filmId)
-                // commit('SET_IS_LOADING_FILM_INFO', false, {root: true})
-                commit('SET_FILM_STAFF', filmStaff.data)
-                console.log('filmStaff', filmStaff.data)
-                console.log('Персонал фильма загрузился')
-            } catch (err) {
-                console.log(err)
-            }
-        }
+
     },
 }

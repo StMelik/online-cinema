@@ -46,18 +46,12 @@ export default {
 
     ...mapActions({
       loadFilmInfo: 'filmInfo/loadFilmInfo',
-      loadFilmStaff: "filmInfo/loadFilmStaff"
     }),
 
-    async getFilmInfo(filmId) {
-      await this.loadFilmInfo(filmId)
-      await this.loadFilmStaff(filmId)
-      this.setIsLoadingFilmInfo(false)
-    },
   },
 
   created() {
-    this.getFilmInfo(this.$route.params.id)
+    this.loadFilmInfo(this.$route.params.id)
 
     // const film = this.films.find(film => film.kinopoiskId == this.$route.params.id)
     // console.log(this.films)
