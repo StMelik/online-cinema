@@ -14,25 +14,9 @@ export default {
         }
     },
     getters: {
-        getFilmDirectors(state) {
-            return state.directors
-                .map(director => {
-                    if (director.nameRu) {
-                        return director.nameRu
-                    } else if (director.nameEn) {
-                        return director.nameEn
-                    } else {
-                        return "Нет информации"
-                    }
-                })
-                .join(', ')
-        },
-
         getFilmActors(state) {
             return state.actors
-                .slice(0, 10)
-                .map(actor => actor.nameRu)
-                .join(', ') + ' и другие'
+                .slice(0, 8)
         }
     },
     mutations: {
@@ -41,6 +25,7 @@ export default {
             state.description = filmInfo.description
             state.rating = filmInfo.ratingKinopoisk
             state.image = filmInfo.coverUrl
+            state.poster = filmInfo.posterUrlPreview
             state.webUrl = filmInfo.webUrl
         },
 
@@ -48,21 +33,25 @@ export default {
             state.directors = filmStaff.filter(item => item.professionKey === "DIRECTOR")
             state.actors = filmStaff.filter(item => item.professionKey === "ACTOR")
         },
+
+        REMOVE_FILM_STAFF(state) {
+            state.directors = []
+            state.actors = []
+        },
     },
     actions: {
         async loadFilmInfo({commit}, filmId) {
             try {
                 commit('loader/SET_IS_LOADING_FILM_INFO', true, {root: true})
+                commit('REMOVE_FILM_STAFF')
                 const filmInfo = await fetchDataFilm(filmId)
-                const filmStaff = await fetchStaffFilm(filmId)
                 commit('SET_FILM_INFO', filmInfo.data)
+                const filmStaff = await fetchStaffFilm(filmId)
                 commit('SET_FILM_STAFF', filmStaff.data)
-                commit('loader/SET_IS_LOADING_FILM_INFO', false, {root: true})
-                console.log('filmInfo', filmInfo.data)
-                console.log('filmStaff', filmStaff.data)
-                console.log('Информация о фильме загрузилась')
             } catch (err) {
                 console.log(err)
+            } finally {
+                commit('loader/SET_IS_LOADING_FILM_INFO', false, {root: true})
             }
         },
 

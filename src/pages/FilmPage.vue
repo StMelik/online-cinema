@@ -3,19 +3,43 @@
   <div v-else class="film-page">
     <h2 class="film-page__title">{{ filmInfo.name }}</h2>
     <img
-        :src="filmInfo.image"
+        :src="filmInfo.image || filmInfo.poster"
         :alt="filmInfo.name"
         class="film-page__image"
     >
     <div class="film-page__description-box">
       <p class="film-page__content-title">Немного о сюжете:</p>
-      <p class="film-page__content-text">{{ filmInfo.description }}</p>
+      <p class="film-page__content-text">{{ filmInfo.description || 'Нет информации' }}</p>
       <p class="film-page__content-title">Рейтинг:</p>
       <p class="film-page__content-text">{{ filmInfo.rating }}</p>
       <p class="film-page__content-title">Актерский состав:</p>
-      <p class="film-page__content-text">{{ filmActors }}</p>
+      <p
+          v-if="filmActors.length === 0"
+          class="film-page__content-text"
+      >
+        Нет информации
+      </p>
+      <ul v-else class="film-page__persons">
+        <PersonFilm
+            v-for="person in filmActors"
+            :key="person.staffId"
+            :person="person"
+        />
+      </ul>
       <p class="film-page__content-title">Режиссеры:</p>
-      <p class="film-page__content-text">{{ filmDirectors }}</p>
+      <p
+          v-if="filmDirectors.length === 0"
+          class="film-page__content-text"
+      >
+        Нет информации
+      </p>
+      <ul v-else class="film-page__persons">
+        <PersonFilm
+            v-for="person in filmDirectors"
+            :key="person.staffId"
+            :person="person"
+        />
+      </ul>
     </div>
     <div class="film-page__review-box">
       <a
@@ -31,8 +55,11 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex"
+import PersonFilm from "@/components/PersonFilm";
 
 export default {
+  components: {PersonFilm},
+
   methods: {
     ...mapMutations({
       setIsLoadingFilmInfo: 'loader/SET_IS_LOADING_FILM_INFO'
@@ -52,10 +79,10 @@ export default {
       isLoadingFilmInfo: state => state.loader.isLoadingFilmInfo,
       films: state => state.films.films,
       filmInfo: state => state.filmInfo,
+      filmDirectors: state => state.filmInfo.directors,
     }),
 
     ...mapGetters({
-      filmDirectors: "filmInfo/getFilmDirectors",
       filmActors: "filmInfo/getFilmActors",
     })
   }
@@ -83,9 +110,10 @@ export default {
 .film-page__content-title {
   color: #e15353;
   font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.film-page p:not(:last-of-type) {
+.film-page__content-text {
   margin-bottom: 10px;
 }
 
@@ -103,6 +131,13 @@ export default {
   right: 0;
   bottom: 0;
   background: linear-gradient(90deg, #e15353 0%, #e1535300 80%);
+}
+
+.film-page__persons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
 .film-page__review-box {
