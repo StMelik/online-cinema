@@ -13,7 +13,12 @@ export default {
                 directors: [],
                 actors: []
             },
-
+            filmsFilter: {
+                ratingFrom: 0,
+                ratingTo: 10,
+                yearFrom: 1900,
+                yearTo: new Date().getFullYear(),
+            }
         }
     },
     getters: {
@@ -53,13 +58,22 @@ export default {
         SET_FILM_STAFF(state, filmStaff) {
             state.filmInfo.directors = filmStaff.filter(item => item.professionKey === "DIRECTOR")
             state.filmInfo.actors = filmStaff.filter(item => item.professionKey === "ACTOR")
-        }
+        },
+
+        SET_FILMS_FILTER(state, payload) {
+          state.filmsFilter = {
+              ...state.filmsFilter,
+              ...payload
+          }
+        },
     },
     actions: {
-        async loadFilms({commit}, page) {
+        async loadFilms({commit}, params) {
             try {
-                const films = await fetchFilms(page)
+                commit('SET_IS_LOADING_FILMS', true, {root: true})
+                const films = await fetchFilms(params)
                 commit('SET_FILMS', films.data.items)
+                commit('SET_TOTAL_PAGE', films.data.totalPages, {root: true})
                 commit('SET_IS_LOADING_FILMS', false, {root: true})
                 console.log('films', films.data)
                 console.log('Фильмы загрузились')

@@ -7,6 +7,8 @@ const store = createStore({
         return {
             isLoadingFilms: true,
             isLoadingFilmInfo: true,
+            page: 1,
+            totalPages: null,
         }
     },
     getters: {
@@ -19,6 +21,14 @@ const store = createStore({
         SET_IS_LOADING_FILM_INFO(state, payload) {
             state.isLoadingFilmInfo = payload
         },
+
+        SET_PAGE(state, payload) {
+            state.page = payload
+        },
+
+        SET_TOTAL_PAGE(state, payload) {
+            state.totalPages = payload
+        }
     },
     actions: {
 

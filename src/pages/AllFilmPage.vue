@@ -1,5 +1,6 @@
 <template>
   <div class="films-page">
+    <FilmsFilter/>
     <h2 class="films-page__title">Выбери фильм на свой вкус</h2>
     <ul class="films-page__list">
       <FilmItem
@@ -8,27 +9,24 @@
         :film="film"
       />
     </ul>
+    <FilmsPagination/>
   </div>
 </template>
 
 <script>
 import {mapState} from "vuex";
 import FilmItem from "@/components/FilmItem";
+import FilmsFilter from "@/components/FilmsFilter";
+import FilmsPagination from "@/components/FilmsPagination";
 
 export default {
-  components: {FilmItem},
-  methods: {
+  components: {FilmsPagination, FilmsFilter, FilmItem},
 
-  },
   computed: {
     ...mapState({
-      films: state => state.films.films
+      films: state => state.films.films,
     }),
   },
-
-  created() {
-
-  }
 }
 </script>
 
@@ -47,6 +45,4 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
-
-
 </style>
