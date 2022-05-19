@@ -42,6 +42,15 @@
           @input="setYearFilter({yearTo: +$event.target.value})"
       >
     </label>
+    <select
+        class="filter-films__select-sort"
+        :value="filmsFilter.order"
+        @change="setSortedFilter($event.target.value)"
+    >
+      <option value="" disabled selected>Сортровать</option>
+      <option value="YEAR">По году</option>
+      <option value="RATING">По рейтингу</option>
+    </select>
     <div class="filter-films__buttons">
       <button
           class="button filter-films__reset"
@@ -70,6 +79,8 @@ export default {
     ...mapMutations({
       setRatingFilter: "filmsFilter/SET_RATING",
       setYearFilter: "filmsFilter/SET_YEAR",
+      setSortedFilter: "filmsFilter/SET_SORTED",
+      resetFilter: "filmsFilter/RESET_FILTER",
       setPage: "pagination/SET_PAGE"
     }),
 
@@ -87,8 +98,7 @@ export default {
 
     handleResetFilterForm() {
       this.setPage(1)
-      this.setRatingFilter({ratingFrom: null, ratingTo: null})
-      this.setYearFilter({yearFrom: null, yearTo: null})
+      this.resetFilter()
       this.loadFilms({page: this.page})
     }
   },
@@ -139,6 +149,14 @@ export default {
   color: #eeeeee;
   background-color: transparent;
   align-items: center;
+}
+
+.filter-films__select-sort {
+  padding: 5px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  color: #eeeeee;
+  background-color: transparent;
 }
 
 .filter-films__buttons {

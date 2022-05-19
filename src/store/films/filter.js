@@ -10,17 +10,20 @@ export default {
             year: {
                 yearFrom: null,
                 yearTo: null
-            }
+            },
+
+            sorted: null
         }
     },
 
     getters: {
-      getFilmsFilter(state) {
-          return {
-              ...state.rating,
-              ...state.year,
-          }
-      }
+        getFilmsFilter(state) {
+            return {
+                ...state.rating,
+                ...state.year,
+                order: state.sorted,
+            }
+        }
     },
 
     mutations: {
@@ -36,6 +39,16 @@ export default {
                 ...state.year,
                 ...payload
             }
+        },
+
+        SET_SORTED(state, payload) {
+            state.sorted = payload
+        },
+
+        RESET_FILTER(state) {
+            state.rating = {ratingFrom: null, ratingTo: null}
+            state.year = {yearFrom: null, yearTo: null}
+            state.sorted = null
         },
     },
 }
