@@ -9,7 +9,7 @@
           max="10"
           placeholder="От"
           :value="filmsFilter.ratingFrom"
-          @input="setFilmsFilter({ratingFrom: +$event.target.value})"
+          @input="setRatingFilter({ratingFrom: +$event.target.value})"
       >
       <input
           class="filter-films__input"
@@ -18,7 +18,7 @@
           max="10"
           placeholder="До"
           :value="filmsFilter.ratingTo"
-          @input="setFilmsFilter({ratingTo: +$event.target.value})"
+          @input="setRatingFilter({ratingTo: +$event.target.value})"
       >
     </label>
     <label class="filter-films__group">
@@ -30,7 +30,7 @@
           max="2050"
           placeholder="От"
           :value="filmsFilter.yearFrom"
-          @input="setFilmsFilter({yearFrom: +$event.target.value})"
+          @input="setYearFilter({yearFrom: +$event.target.value})"
       >
       <input
           class="filter-films__input"
@@ -39,7 +39,7 @@
           max="2050"
           placeholder="До"
           :value="filmsFilter.yearTo"
-          @input="setFilmsFilter({yearTo: +$event.target.value})"
+          @input="setYearFilter({yearTo: +$event.target.value})"
       >
     </label>
     <div class="filter-films__buttons">
@@ -61,14 +61,15 @@
 </template>
 
 <script>
-import {mapActions, mapMutations, mapState} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 
 
 export default {
 
   methods: {
     ...mapMutations({
-      setFilmsFilter: "filmsFilter/SET_FILMS_FILTER",
+      setRatingFilter: "filmsFilter/SET_RATING",
+      setYearFilter: "filmsFilter/SET_YEAR",
       setPage: "pagination/SET_PAGE"
     }),
 
@@ -80,29 +81,25 @@ export default {
       this.setPage(1)
       this.loadFilms({
         page: this.page,
-        ...this.filmsFilter
+        filter: this.filmsFilter,
       })
     },
 
     handleResetFilterForm() {
       this.setPage(1)
-      this.setFilmsFilter({
-        ratingFrom: 0,
-        ratingTo: 10,
-        yearFrom: 1850,
-        yearTo: new Date().getFullYear(),
-      })
-      this.loadFilms({
-        page: this.page,
-        ...this.filmsFilter
-      })
+      this.setRatingFilter({ratingFrom: null, ratingTo: null})
+      this.setYearFilter({yearFrom: null, yearTo: null})
+      this.loadFilms({page: this.page})
     }
   },
   computed: {
     ...mapState({
-      filmsFilter: state => state.filmsFilter.filter,
       page: state => state.pagination.page
     }),
+
+    ...mapGetters({
+      filmsFilter: "filmsFilter/getFilmsFilter",
+    })
   },
 }
 </script>

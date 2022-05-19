@@ -2,18 +2,38 @@ export default {
     namespaced: true,
     state() {
         return {
-            filter: {
-                ratingFrom: 0,
-                ratingTo: 10,
-                yearFrom: 1900,
-                yearTo: new Date().getFullYear(),
+            rating: {
+                ratingFrom: null,
+                ratingTo: null
+            },
+
+            year: {
+                yearFrom: null,
+                yearTo: null
             }
         }
     },
+
+    getters: {
+      getFilmsFilter(state) {
+          return {
+              ...state.rating,
+              ...state.year,
+          }
+      }
+    },
+
     mutations: {
-        SET_FILMS_FILTER(state, payload) {
-            state.filter = {
-                ...state.filter,
+        SET_RATING(state, payload) {
+            state.rating = {
+                ...state.rating,
+                ...payload
+            }
+        },
+
+        SET_YEAR(state, payload) {
+            state.year = {
+                ...state.year,
                 ...payload
             }
         },

@@ -1,12 +1,13 @@
 import axios from "axios";
 import configApi from "@/utils/configApi";
 
-export function fetchFilms(params) {
+export function fetchFilms(page, filter) {
     return axios.get("/api/v2.2/films", {
         ...configApi,
         params: {
             type: 'FILM',
-            ...params
+            page,
+            ...filter,
         }
     })
 }

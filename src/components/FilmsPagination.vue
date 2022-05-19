@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {mapActions, mapMutations, mapState} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 
 
 export default {
@@ -31,16 +31,19 @@ export default {
       this.setPage(page);
       this.loadFilms({
         page: this.page,
-        ...this.filmsFilter
+        filter: this.filmsFilter,
       })
     }
   },
   computed: {
     ...mapState({
-      filmsFilter: state => state.filmsFilter.filter,
       page: state => state.pagination.page,
       totalPages: state => state.pagination.totalPages
     }),
+
+    ...mapGetters({
+      filmsFilter: "filmsFilter/getFilmsFilter",
+    })
   },
 }
 </script>

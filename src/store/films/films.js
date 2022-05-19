@@ -17,10 +17,10 @@ export default {
 
     },
     actions: {
-        async loadFilms({commit}, params) {
+        async loadFilms({commit}, {page, filter}) {
             try {
                 commit('loader/SET_IS_LOADING_FILMS', true, {root: true})
-                const films = await fetchFilms(params)
+                const films = await fetchFilms(page, filter)
                 commit('SET_FILMS', films.data.items)
                 commit('pagination/SET_TOTAL_PAGE', films.data.totalPages, {root: true})
                 commit('loader/SET_IS_LOADING_FILMS', false, {root: true})
