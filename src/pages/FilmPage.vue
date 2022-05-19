@@ -1,5 +1,7 @@
 <template>
-  <p v-if="isLoadingFilmInfo">Загрузка</p>
+  <div v-if="isLoadingFilmInfo" class="preloader">
+    <MyPreloader/>
+  </div>
   <div v-else class="film-page">
     <h2 class="film-page__title">{{ filmInfo.name }}</h2>
     <img
@@ -56,9 +58,10 @@
 <script>
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex"
 import PersonFilm from "@/components/PersonFilm";
+import MyPreloader from "@/components/MyPreloader";
 
 export default {
-  components: {PersonFilm},
+  components: {MyPreloader, PersonFilm},
 
   methods: {
     ...mapMutations({

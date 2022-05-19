@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .preloader {
   display: flex;
   justify-content: center;
