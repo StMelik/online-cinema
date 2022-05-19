@@ -13,8 +13,8 @@
         :class="isFavoriteFilm && 'item-films__favorite-button_active'"
     ></button>
     <img class="item-films__image" :src="film.posterUrlPreview" :alt="film.nameRu">
-    <div class="item-films__rating">{{ film.ratingKinopoisk }}</div>
-    <p class="item-films__title">{{ film.nameRu }}</p>
+    <div class="item-films__rating">{{ film.ratingKinopoisk || "..." }}</div>
+    <p class="item-films__title">{{ film.nameRu || film.nameOriginal }}</p>
   </li>
 </template>
 
