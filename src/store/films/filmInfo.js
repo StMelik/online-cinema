@@ -5,6 +5,7 @@ export default {
     state() {
         return {
             name: '',
+            year: '',
             description: '',
             rating: 0,
             image: null,
@@ -22,6 +23,7 @@ export default {
     mutations: {
         SET_FILM_INFO(state, filmInfo) {
             state.name = filmInfo.nameRu
+            state.year = filmInfo.year
             state.description = filmInfo.description
             state.rating = filmInfo.ratingKinopoisk
             state.image = filmInfo.coverUrl

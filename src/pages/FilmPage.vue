@@ -3,7 +3,7 @@
     <MyPreloader/>
   </div>
   <div v-else class="film-page">
-    <h2 class="film-page__title">{{ filmInfo.name }}</h2>
+    <h2 class="film-page__title">{{ filmInfo.name }} ({{ filmInfo.year }} г.)</h2>
     <img
         :src="filmInfo.image || filmInfo.poster"
         :alt="filmInfo.name"
