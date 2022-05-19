@@ -42,6 +42,15 @@
           @input="setYearFilter({yearTo: +$event.target.value})"
       >
     </label>
+    <label class="filter-films__group">
+      <input
+          class="filter-films__input"
+          placeholder="Ключевое слово"
+          :value="filmsFilter.keyword"
+          :style="{width: '100%'}"
+          @input="setKeywordFilter($event.target.value)"
+      >
+    </label>
     <select
         class="filter-films__select-sort"
         :value="filmsFilter.order"
@@ -79,6 +88,7 @@ export default {
     ...mapMutations({
       setRatingFilter: "filmsFilter/SET_RATING",
       setYearFilter: "filmsFilter/SET_YEAR",
+      setKeywordFilter: "filmsFilter/SET_KEYWORD",
       setSortedFilter: "filmsFilter/SET_SORTED",
       resetFilter: "filmsFilter/RESET_FILTER",
       setPage: "pagination/SET_PAGE"

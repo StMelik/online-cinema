@@ -12,7 +12,8 @@ export default {
                 yearTo: null
             },
 
-            sorted: null
+            sorted: null,
+            keyword: null,
         }
     },
 
@@ -22,6 +23,7 @@ export default {
                 ...state.rating,
                 ...state.year,
                 order: state.sorted,
+                keyword: state.keyword,
             }
         }
     },
@@ -45,10 +47,15 @@ export default {
             state.sorted = payload
         },
 
+        SET_KEYWORD(state, payload) {
+            state.keyword = payload
+        },
+
         RESET_FILTER(state) {
             state.rating = {ratingFrom: null, ratingTo: null}
             state.year = {yearFrom: null, yearTo: null}
             state.sorted = null
+            state.keyword = null
         },
     },
 }
